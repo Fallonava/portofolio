@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans, Inter } from "next/font/google";
+import { SmoothScroll } from "@/components/providers/SmoothScroll";
 import "./globals.css";
 
 const plusJakarta = Plus_Jakarta_Sans({
@@ -52,7 +53,9 @@ export default function RootLayout({
       <body
         className={`${plusJakarta.variable} ${inter.variable} font-sans antialiased`}
       >
-        {children}
+        <SmoothScroll>
+          {children}
+        </SmoothScroll>
       </body>
     </html>
   );

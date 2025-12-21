@@ -35,7 +35,12 @@ export function Hero() {
                 {/* Heading */}
                 <div className="text-5xl md:text-7xl lg:text-8xl font-heading font-extrabold text-foreground tracking-tight leading-[1.1] mb-8">
                     <BlurText text="Building the" className="block text-foreground" delay={0.2} />
-                    <div className="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-4 mt-2">
+                    <motion.div
+                        initial={{ filter: 'blur(10px)', opacity: 0, y: 20 }}
+                        animate={{ filter: 'blur(0px)', opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+                        className="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-4 mt-2"
+                    >
                         <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-600">
                             Future of
                         </span>
@@ -51,7 +56,7 @@ export function Hero() {
                             transition={{ type: "spring", damping: 30, stiffness: 400 }}
                             rotationInterval={2000}
                         />
-                    </div>
+                    </motion.div>
                 </div>
 
                 {/* Description */}

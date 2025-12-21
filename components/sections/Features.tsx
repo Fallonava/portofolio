@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Card } from '@/components/ui/Card';
+import { TiltCard } from '@/components/ui/TiltCard';
 import { Palette, Rocket, Lock, Globe, Smartphone, Zap } from 'lucide-react';
 
 const features = [
@@ -86,7 +86,7 @@ export function Features() {
                 >
                     {features.map((feature, idx) => (
                         <motion.div key={idx} variants={item}>
-                            <Card className="h-full flex flex-col items-start gap-4">
+                            <TiltCard className="h-full flex flex-col items-start gap-4 p-6 bg-card border border-border rounded-xl shadow-sm hover:shadow-md transition-shadow">
                                 <div className={`p-3 rounded-2xl bg-white/5 ${feature.color}`}>
                                     {(() => {
                                         const Icon = feature.icon;
@@ -99,7 +99,7 @@ export function Features() {
                                         {feature.description}
                                     </p>
                                 </div>
-                            </Card>
+                            </TiltCard>
                         </motion.div>
                     ))}
                 </motion.div>
