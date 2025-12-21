@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
 import Link from 'next/link';
 import { InfiniteScroll } from '../ui/InfiniteScroll';
+import { NextJsIcon, ReactIcon, TypeScriptIcon, TailwindIcon, NodeJsIcon, FramerIcon, FigmaIcon, GitIcon } from '@/components/ui/Icons';
 
 export function About() {
     return (
@@ -73,14 +74,14 @@ export function About() {
                     <h3 className="text-center text-2xl font-bold mb-8 text-muted-foreground">Technologi Stack</h3>
                     <InfiniteScroll
                         items={[
-                            <div key="next" className="text-foreground font-bold text-xl">Next.js</div>,
-                            <div key="react" className="text-foreground font-bold text-xl">React</div>,
-                            <div key="ts" className="text-foreground font-bold text-xl">TypeScript</div>,
-                            <div key="tw" className="text-foreground font-bold text-xl">Tailwind</div>,
-                            <div key="node" className="text-foreground font-bold text-xl">Node.js</div>,
-                            <div key="framer" className="text-foreground font-bold text-xl">Framer</div>,
-                            <div key="figma" className="text-foreground font-bold text-xl">Figma</div>,
-                            <div key="git" className="text-foreground font-bold text-xl">Git</div>,
+                            <div key="next" className="flex items-center gap-2 text-foreground font-bold text-xl"><NextJsIcon className="w-8 h-8" /> Next.js</div>,
+                            <div key="react" className="flex items-center gap-2 text-foreground font-bold text-xl"><ReactIcon className="w-8 h-8 text-[#61DAFB]" /> React</div>,
+                            <div key="ts" className="flex items-center gap-2 text-foreground font-bold text-xl"><TypeScriptIcon className="w-8 h-8 text-[#3178C6]" /> TypeScript</div>,
+                            <div key="tw" className="flex items-center gap-2 text-foreground font-bold text-xl"><TailwindIcon className="w-8 h-8 text-[#06B6D4]" /> Tailwind</div>,
+                            <div key="node" className="flex items-center gap-2 text-foreground font-bold text-xl"><NodeJsIcon className="w-8 h-8 text-[#339933]" /> Node.js</div>,
+                            <div key="framer" className="flex items-center gap-2 text-foreground font-bold text-xl"><FramerIcon className="w-8 h-8" /> Framer</div>,
+                            <div key="figma" className="flex items-center gap-2 text-foreground font-bold text-xl"><FigmaIcon className="w-8 h-8" /> Figma</div>,
+                            <div key="git" className="flex items-center gap-2 text-foreground font-bold text-xl"><GitIcon className="w-8 h-8 text-[#F05032]" /> Git</div>,
                         ]}
                         direction="left"
                         speed="normal"
