@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { InfiniteScroll } from '@/components/ui/InfiniteScroll';
+import Image from 'next/image';
 
 const techStack = [
     { name: "Next.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" },
@@ -10,8 +11,14 @@ const techStack = [
     { name: "Tailwind", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg" },
     { name: "Node.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" },
     { name: "PostgreSQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" },
+    { name: "GraphQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/graphql/graphql-plain.svg" },
+    { name: "Prisma", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/prisma/prisma-original.svg" },
+    { name: "Docker", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" },
+    { name: "MongoDB", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" },
+    { name: "Redis", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg" },
     { name: "Figma", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" },
     { name: "Git", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" },
+    { name: "Vercel", icon: "https://assets.vercel.com/image/upload/v1588805858/repositories/vercel/logo.png" },
 ];
 
 export function About() {
@@ -67,7 +74,15 @@ export function About() {
                             <InfiniteScroll
                                 items={techStack.map(tech => (
                                     <div key={tech.name} className="flex flex-col items-center justify-center gap-2">
-                                        <img src={tech.icon} alt={tech.name} className="w-12 h-12 md:w-16 md:h-16 object-contain" />
+                                        <div className="relative w-12 h-12 md:w-16 md:h-16">
+                                            <Image
+                                                src={tech.icon}
+                                                alt={tech.name}
+                                                fill
+                                                className="object-contain"
+                                                sizes="(max-width: 768px) 48px, 64px"
+                                            />
+                                        </div>
                                         <span className="text-sm font-medium text-muted-foreground">{tech.name}</span>
                                     </div>
                                 ))}
