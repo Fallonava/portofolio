@@ -10,7 +10,7 @@ export function Footer() {
                     {/* Brand */}
                     <div className="flex flex-col gap-4">
                         <h2 className="text-3xl md:text-5xl font-heading font-bold text-foreground tracking-tighter">
-                            Antigravity
+                            Fallonava
                         </h2>
                         <p className="text-muted-foreground max-w-sm">
                             Crafting digital experiences that defy expectations.
@@ -21,7 +21,7 @@ export function Footer() {
                     <div className="grid grid-cols-2 gap-10 md:gap-20">
                         <div className="flex flex-col gap-4">
                             <h4 className="font-semibold text-foreground">Socials</h4>
-                            <Link href="#" className="text-muted-foreground hover:text-primary transition-colors flex items-center gap-2">
+                            <Link href="https://github.com/Fallonava" target="_blank" className="text-muted-foreground hover:text-primary transition-colors flex items-center gap-2">
                                 <Github size={18} /> GitHub
                             </Link>
                             <Link href="#" className="text-muted-foreground hover:text-primary transition-colors flex items-center gap-2">
@@ -42,7 +42,7 @@ export function Footer() {
                 </div>
 
                 <div className="mt-16 pt-8 border-t border-border/50 flex flex-col md:flex-row justify-between items-center gap-4 text-sm text-muted-foreground">
-                    <p>© {new Date().getFullYear()} Antigravity Portfolio. All rights reserved.</p>
+                    <p>© {new Date().getFullYear()} Fallonava Project. All rights reserved.</p>
                     <div className="flex items-center gap-6">
                         <Link href="#" className="hover:text-foreground">Privacy Policy</Link>
                         <Link href="#" className="hover:text-foreground">Terms of Service</Link>

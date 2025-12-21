@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import { Outfit, Inter } from "next/font/google";
+import { Plus_Jakarta_Sans, Inter } from "next/font/google";
 import "./globals.css";
 
-const outfit = Outfit({
-  variable: "--font-outfit",
+const plusJakarta = Plus_Jakarta_Sans({
+  variable: "--font-heading",
   subsets: ["latin"],
   display: "swap",
 });
@@ -16,13 +16,13 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: "Antigravity | Build the Future",
-    template: "%s | Antigravity Portfolio"
+    default: "Fallonava Project | Future Web",
+    template: "%s | Fallonava Project"
   },
-  description: "A next-generation full-stack developer portfolio. Experience the fusion of high-performance code and stunning visual design.",
-  keywords: ["Next.js", "React", "Tailwind CSS", "Portfolio", "Full Stack", "Web Development"],
-  authors: [{ name: "Antigravity Dev" }],
-  creator: "Antigravity Dev",
+  description: "Experience the fusion of high-performance code and stunning visual design by Fallonava.",
+  keywords: ["Next.js", "React", "Portfolio", "Fallonava", "Full Stack"],
+  authors: [{ name: "Fallonava" }],
+  creator: "Fallonava",
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -50,7 +50,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${outfit.variable} ${inter.variable} font-sans antialiased`}
+        className={`${plusJakarta.variable} ${inter.variable} font-sans antialiased`}
       >
         {children}
       </body>

@@ -36,10 +36,10 @@ export function Navbar() {
                 {/* Logo */}
                 <Link href="/" className="flex items-center gap-2 group">
                     <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white font-bold text-xl group-hover:scale-110 transition-transform">
-                        A
+                        F
                     </div>
                     <span className="font-heading font-bold text-xl tracking-tight text-foreground">
-                        Antigravity
+                        Fallonava Project
                     </span>
                 </Link>
 
