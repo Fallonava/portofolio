@@ -55,7 +55,7 @@ const container = {
 
 const item = {
     hidden: { opacity: 0, y: 30 },
-    show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 50 } }
+    show: { opacity: 1, y: 0, transition: { type: "spring" as const, stiffness: 50 } }
 };
 
 export function Features() {
@@ -88,7 +88,10 @@ export function Features() {
                         <motion.div key={idx} variants={item}>
                             <Card className="h-full flex flex-col items-start gap-4">
                                 <div className={`p-3 rounded-2xl bg-white/5 ${feature.color}`}>
-                                    <feature.icon size={32} />
+                                    {(() => {
+                                        const Icon = feature.icon;
+                                        return <Icon size={32} />;
+                                    })()}
                                 </div>
                                 <div>
                                     <h3 className="text-xl font-bold mb-2">{feature.title}</h3>

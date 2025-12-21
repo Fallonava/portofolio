@@ -61,7 +61,7 @@ export function About() {
                                 href="mailto:hello@antigravity.dev"
                                 className="inline-flex items-center text-lg font-medium text-primary hover:text-blue-700 transition-colors group"
                             >
-                                Let's work together
+                                Let&apos;s work together
                                 <ArrowUpRight className="ml-2 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
                             </Link>
                         </div>
