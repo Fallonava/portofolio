@@ -1,6 +1,8 @@
 'use client';
 
 import { GalaxyBackground } from './GalaxyBackground';
+import { RotatingText } from '@/components/ui/RotatingText';
+import { BlurText } from '@/components/ui/BlurText';
 import { motion } from 'framer-motion';
 import { ArrowRight, Download } from 'lucide-react';
 import Link from 'next/link';
@@ -31,17 +33,26 @@ export function Hero() {
                 </motion.div>
 
                 {/* Heading */}
-                <motion.h1
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
-                    className="text-5xl md:text-7xl lg:text-8xl font-heading font-extrabold text-foreground tracking-tight leading-[1.1] mb-8"
-                >
-                    Building the <br className="hidden md:block" />
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-600">
-                        Future of Web
-                    </span>
-                </motion.h1>
+                <div className="text-5xl md:text-7xl lg:text-8xl font-heading font-extrabold text-foreground tracking-tight leading-[1.1] mb-8">
+                    <BlurText text="Building the" className="block text-foreground" delay={0.2} />
+                    <div className="flex flex-col md:flex-row items-center justify-center gap-2 md:gap-4 mt-2">
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-600">
+                            Future of
+                        </span>
+                        <RotatingText
+                            texts={['Web', 'Design', 'Tech']}
+                            mainClassName="bg-primary px-2 sm:px-2 md:px-3 text-white overflow-hidden py-0.5 sm:py-1 md:py-2 justify-center rounded-lg"
+                            staggerFrom="last"
+                            initial={{ y: "100%" }}
+                            animate={{ y: 0 }}
+                            exit={{ y: "-120%" }}
+                            staggerDuration={0.025}
+                            splitLevelClassName="overflow-hidden pb-0.5 sm:pb-1 md:pb-1"
+                            transition={{ type: "spring", damping: 30, stiffness: 400 }}
+                            rotationInterval={2000}
+                        />
+                    </div>
+                </div>
 
                 {/* Description */}
                 <motion.p

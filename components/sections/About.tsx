@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion';
 import { ArrowUpRight } from 'lucide-react';
 import Link from 'next/link';
+import { InfiniteScroll } from '../ui/InfiniteScroll';
 
 export function About() {
     return (
@@ -66,7 +67,25 @@ export function About() {
                             </Link>
                         </div>
                     </motion.div>
+                </div>
 
+                <div className="mt-24">
+                    <h3 className="text-center text-2xl font-bold mb-8 text-muted-foreground">Technologi Stack</h3>
+                    <InfiniteScroll
+                        items={[
+                            <div key="next" className="text-foreground font-bold text-xl">Next.js</div>,
+                            <div key="react" className="text-foreground font-bold text-xl">React</div>,
+                            <div key="ts" className="text-foreground font-bold text-xl">TypeScript</div>,
+                            <div key="tw" className="text-foreground font-bold text-xl">Tailwind</div>,
+                            <div key="node" className="text-foreground font-bold text-xl">Node.js</div>,
+                            <div key="framer" className="text-foreground font-bold text-xl">Framer</div>,
+                            <div key="figma" className="text-foreground font-bold text-xl">Figma</div>,
+                            <div key="git" className="text-foreground font-bold text-xl">Git</div>,
+                        ]}
+                        direction="left"
+                        speed="normal"
+                        className="w-full"
+                    />
                 </div>
             </div>
         </section>
