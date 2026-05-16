@@ -4,9 +4,11 @@ import CardSwap, { Card } from "@/components/ui/CardSwap";
 import DecryptedText from "@/components/ui/DecryptedText";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
-import { testimonials as CARDS } from "@/lib/data";
+import { testimonials as staticCards } from "@/lib/data";
+import { PortableText } from "next-sanity";
 
-export function Testimonials() {
+export function Testimonials({ data }: { data: any[] }) {
+    const CARDS = data.length > 0 ? data : staticCards;
     return (
         <section className="py-32 bg-secondary border-b-[3px] border-border overflow-hidden relative min-h-[800px] flex items-center justify-center">
             <div className="container mx-auto px-6">
@@ -80,10 +82,14 @@ export function Testimonials() {
                             height={400}
                             skewAmount={4}
                         >
-                            {CARDS.map((card) => (
-                                <Card key={card.id} className="p-8 flex flex-col justify-between bg-card brutal-border brutal-shadow transition-transform hover:-translate-y-2">
+                            {CARDS.map((card, idx) => (
+                                <Card key={card.id ?? idx} className="p-8 flex flex-col justify-between bg-card brutal-border brutal-shadow transition-transform hover:-translate-y-2">
                                     <div className="text-xl font-bold text-card-foreground border-l-[3px] border-border pl-4 mb-8">
-                                        {card.content}
+                                        {/* Support both Sanity (block content) and static (ReactNode) */}
+                                        {Array.isArray(card.content)
+                                            ? <PortableText value={card.content} />
+                                            : card.content
+                                        }
                                     </div>
                                     <div className="bg-primary p-4 brutal-border mt-auto">
                                         <p className="text-foreground font-black text-xl uppercase tracking-wider">

@@ -3,9 +3,7 @@
 import { motion } from 'framer-motion';
 import { Briefcase, Calendar } from 'lucide-react';
 
-import { experiences } from '@/lib/data';
-
-export function Experience() {
+export function Experience({ data }: { data: any[] }) {
     return (
         <section id="experience" className="py-32 bg-primary relative overflow-hidden border-y-[3px] border-border">
             <div className="absolute inset-0 bg-dot opacity-20 pointer-events-none mix-blend-multiply dark:mix-blend-overlay"></div>
@@ -25,7 +23,7 @@ export function Experience() {
                     {/* Vertical Line */}
                     <div className="absolute left-[15px] md:left-1/2 top-0 bottom-0 w-2 bg-foreground -translate-x-1/2 rounded-full" />
 
-                    {experiences.map((exp, idx) => (
+                    {data.map((exp, idx) => (
                         <motion.div
                             key={idx}
                             initial={{ opacity: 0, y: 30 }}
@@ -58,7 +56,7 @@ export function Experience() {
                                         {exp.description}
                                     </p>
                                     <div className="flex flex-wrap gap-3">
-                                        {exp.tech.map((t, i) => (
+                                        {exp.tech.map((t: string, i: number) => (
                                             <span key={i} className="px-3 py-1 bg-background text-foreground font-black uppercase text-xs border-[3px] border-border rounded-xl brutal-shadow-sm">
                                                 {t}
                                             </span>

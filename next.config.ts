@@ -10,6 +10,10 @@ const nextConfig: NextConfig = {
       {
         hostname: 'cdn.jsdelivr.net',
       },
+      {
+        protocol: 'https',
+        hostname: 'cdn.sanity.io',
+      },
     ],
     formats: ['image/avif', 'image/webp'],
   },

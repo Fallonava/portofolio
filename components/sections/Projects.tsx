@@ -7,14 +7,15 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { ProjectModal } from "../ui/ProjectModal";
 
-import { allProjects, PROJECT_CATEGORIES as CATEGORIES } from '@/lib/data';
+import { PROJECT_CATEGORIES as CATEGORIES } from '@/lib/data';
+import { urlForImage } from "@/sanity/lib/image";
 
-export function Projects() {
-    const [selectedProject, setSelectedProject] = useState<typeof allProjects[0] | null>(null);
+export function Projects({ data }: { data: any[] }) {
+    const [selectedProject, setSelectedProject] = useState<any | null>(null);
     const [activeCategory, setActiveCategory] = useState("All");
     const [showArchive, setShowArchive] = useState(false);
 
-    const filteredProjects = allProjects.filter(
+    const filteredProjects = data.filter(
         (project) => activeCategory === "All" || project.category === activeCategory
     );
 
@@ -107,7 +108,7 @@ export function Projects() {
                                     <SpotlightCard className="h-full flex flex-col !p-6" hoverColor={project.color === 'blue' ? "bg-cyan-400" : "bg-pink-400"}>
                                         <div className={`relative w-full overflow-hidden mb-6 brutal-border bg-black transition-colors brutal-shadow-sm ${aspectRatio}`}>
                                             <Image
-                                                src={project.image}
+                                                src={typeof project.image === 'string' ? project.image : urlForImage(project.image).url()}
                                                 alt={project.title}
                                                 fill
                                                 priority={idx === 0}
@@ -129,7 +130,7 @@ export function Projects() {
                                                 {project.description}
                                             </p>
                                             <div className="flex flex-wrap gap-1 sm:gap-2 mt-auto">
-                                                {project.tech.map((t) => (
+                                                {project.tech.map((t: string) => (
                                                     <span key={t} className={`px-2 py-1 sm:px-3 sm:py-1 text-[10px] sm:text-xs font-black uppercase brutal-border brutal-shadow-sm bg-background text-foreground`}>
                                                         {t}
                                                     </span>
@@ -180,7 +181,7 @@ export function Projects() {
                                                 {project.title}
                                             </h4>
                                             <div className="hidden md:flex flex-wrap gap-2">
-                                                {project.tech.slice(0, 2).map((t) => (
+                                                {project.tech.slice(0, 2).map((t: string) => (
                                                     <span key={t} className="px-2 py-1 text-[10px] font-black uppercase border-[2px] border-border bg-background text-foreground">
                                                         {t}
                                                     </span>

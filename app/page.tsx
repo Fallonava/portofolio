@@ -10,8 +10,30 @@ const Features = dynamic(() => import("@/components/sections/Features").then(m =
 const Contact = dynamic(() => import("@/components/sections/Contact").then(m => m.Contact), { ssr: true });
 const Testimonials = dynamic(() => import("@/components/sections/Testimonials").then(m => m.Testimonials), { ssr: true });
 import { Footer } from "@/components/layout/Footer";
+import { client } from "@/sanity/lib/client";
+import { allProjects, experiences as staticExperiences, testimonials as staticTestimonials } from "@/lib/data";
 
-export default function Home() {
+export const revalidate = 60; // Revalidate every 60 seconds
+
+async function getSanityData() {
+  try {
+    const projects = await client.fetch(`*[_type == "project"] | order(order asc)`);
+    const experiences = await client.fetch(`*[_type == "experience"] | order(order asc)`);
+    const testimonials = await client.fetch(`*[_type == "testimonial"] | order(order asc)`);
+    return { projects, experiences, testimonials };
+  } catch (error) {
+    console.error("Sanity fetch error:", error);
+    return { projects: [], experiences: [], testimonials: [] };
+  }
+}
+
+export default async function Home() {
+  const { projects: sanityProjects, experiences: sanityExperiences, testimonials: sanityTestimonials } = await getSanityData();
+
+  const finalProjects = sanityProjects?.length > 0 ? sanityProjects : allProjects;
+  const finalExperiences = sanityExperiences?.length > 0 ? sanityExperiences : staticExperiences;
+  const finalTestimonials = sanityTestimonials?.length > 0 ? sanityTestimonials : staticTestimonials;
+
   return (
     <main className="flex min-h-screen flex-col bg-background">
       <Navbar />
@@ -20,15 +42,13 @@ export default function Home() {
       <Marquee />
       <About />
 
-      <Experience />
+      <Experience data={finalExperiences} />
 
-      <Projects />
+      <Projects data={finalProjects} />
 
       <Features />
 
-
-
-      <Testimonials />
+      <Testimonials data={finalTestimonials} />
 
       <Contact />
 
