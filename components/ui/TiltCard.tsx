@@ -2,6 +2,7 @@
 
 import React, { useRef, useState } from 'react';
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import { cn } from '@/lib/utils';
 
 interface TiltCardProps {
     children: React.ReactNode;
@@ -62,9 +63,9 @@ export const TiltCard = ({
             }}
             whileHover={{ scale }}
             transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-            className={`relative transform-gpu ${className}`}
+            className={cn("relative brutal-border brutal-shadow brutal-hover bg-white p-2 transform-gpu", className)}
         >
-            <div style={{ transform: "translateZ(50px)" }}>
+            <div style={{ transform: "translateZ(50px)" }} className="bg-white/10 w-full h-full brutal-border">
                 {children}
             </div>
         </motion.div>

@@ -4,44 +4,7 @@ import { motion } from 'framer-motion';
 import { TiltCard } from '@/components/ui/TiltCard';
 import { Palette, Rocket, Lock, Globe, Smartphone, Zap } from 'lucide-react';
 
-const features = [
-    {
-        title: "Modern Aesthetics",
-        description: "Interfaces that blend art and functionality using the latest design trends.",
-        icon: Palette,
-        color: "text-purple-400"
-    },
-    {
-        title: "High Performance",
-        description: "Optimized for speed with Next.js App Router and server components.",
-        icon: Rocket,
-        color: "text-blue-400"
-    },
-    {
-        title: "Secure by Design",
-        description: "Implementing best practices for data protection and authentication.",
-        icon: Lock,
-        color: "text-green-400"
-    },
-    {
-        title: "Global Scale",
-        description: "Built to deploy on the edge, reaching users instantly anywhere.",
-        icon: Globe,
-        color: "text-cyan-400"
-    },
-    {
-        title: "Mobile First",
-        description: "Responsive designs that look clear and fluid on any device.",
-        icon: Smartphone,
-        color: "text-pink-400"
-    },
-    {
-        title: "Instant Interactivity",
-        description: "Smooth animations and transitions powered by Framer Motion.",
-        icon: Zap,
-        color: "text-amber-400"
-    }
-];
+import { features } from '@/lib/data';
 
 const container = {
     hidden: { opacity: 0 },
@@ -60,19 +23,19 @@ const item = {
 
 export function Features() {
     return (
-        <section id="features" className="py-24 relative bg-background">
+        <section id="features" className="py-32 relative bg-background border-b-[3px] border-border">
             <div className="container mx-auto px-6">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-100px" }}
                     transition={{ duration: 0.6 }}
-                    className="text-center mb-16"
+                    className="text-center mb-20"
                 >
-                    <h2 className="text-4xl md:text-5xl font-heading font-bold mb-4 tracking-tight">
-                        Designed for <span className="text-primary">Impact</span>
+                    <h2 className="text-[clamp(2.5rem,6vw,5rem)] font-black mb-8 tracking-tighter uppercase text-center bg-card text-card-foreground brutal-border brutal-shadow inline-block px-4 sm:px-8 py-4 rotate-1 text-outline">
+                        DESIGNED FOR IMPACT
                     </h2>
-                    <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
+                    <p className="text-foreground font-bold max-w-2xl mx-auto text-xl uppercase brutal-border p-4 brutal-shadow bg-secondary">
                         Every project is built with a focus on core principles that drive user engagement and business growth.
                     </p>
                 </motion.div>
@@ -86,18 +49,20 @@ export function Features() {
                 >
                     {features.map((feature, idx) => (
                         <motion.div key={idx} variants={item}>
-                            <TiltCard className="h-full flex flex-col items-start gap-4 p-6 bg-card border border-border rounded-xl shadow-sm hover:shadow-md transition-shadow">
-                                <div className={`p-3 rounded-2xl bg-white/5 ${feature.color}`}>
-                                    {(() => {
-                                        const Icon = feature.icon;
-                                        return <Icon size={32} />;
-                                    })()}
-                                </div>
-                                <div>
-                                    <h3 className="text-xl font-bold mb-2">{feature.title}</h3>
-                                    <p className="text-muted-foreground leading-relaxed">
-                                        {feature.description}
-                                    </p>
+                            <TiltCard className="h-full !p-0 rounded-2xl">
+                                <div className="h-full flex flex-col items-start gap-6 p-8 bg-card brutal-border brutal-shadow">
+                                    <div className={`p-4 brutal-border brutal-shadow-sm text-foreground ${feature.color}`}>
+                                        {(() => {
+                                            const Icon = feature.icon;
+                                            return <Icon size={40} strokeWidth={3} />;
+                                        })()}
+                                    </div>
+                                    <div>
+                                        <h3 className="text-2xl font-black mb-4 text-card-foreground uppercase">{feature.title}</h3>
+                                        <p className="text-card-foreground font-bold leading-relaxed border-l-[3px] border-border pl-4">
+                                            {feature.description}
+                                        </p>
+                                    </div>
                                 </div>
                             </TiltCard>
                         </motion.div>

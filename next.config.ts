@@ -8,10 +8,10 @@ const nextConfig: NextConfig = {
         hostname: 'assets.vercel.com',
       },
       {
-        protocol: 'https',
         hostname: 'cdn.jsdelivr.net',
       },
     ],
+    formats: ['image/avif', 'image/webp'],
   },
 };
 

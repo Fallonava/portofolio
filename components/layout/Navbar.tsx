@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { cn } from '@/lib/utils';
 import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { ThemeToggle } from '@/components/theme-toggle';
 
 const navLinks = [
     { name: 'Product', href: '#product' },
@@ -28,41 +29,45 @@ export function Navbar() {
     return (
         <nav
             className={cn(
-                'fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b border-transparent',
-                scrolled ? 'bg-background/80 backdrop-blur-md border-border py-3' : 'bg-transparent py-5'
+                'fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b-[3px] border-transparent',
+                scrolled ? 'bg-background border-border py-3' : 'bg-transparent py-5'
             )}
         >
             <div className="container mx-auto px-6 flex items-center justify-between">
                 {/* Logo */}
-                <Link href="/" className="flex items-center gap-2 group">
-                    <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white font-bold text-xl group-hover:scale-110 transition-transform">
+                <Link href="/" className="flex items-center gap-2 group brutal-hover p-1">
+                    <div className="w-10 h-10 bg-primary border-[3px] border-border flex items-center justify-center text-foreground font-bold text-xl brutal-shadow-sm rounded-xl">
                         F
                     </div>
-                    <span className="font-heading font-bold text-xl tracking-tight text-foreground">
-                        Fallonava Project
+                    <span className="font-heading font-black text-2xl tracking-tight text-foreground uppercase">
+                        Fallonava
                     </span>
                 </Link>
 
                 {/* Desktop Links */}
-                <div className="hidden md:flex items-center gap-8">
+                <div className="hidden md:flex items-center gap-6">
                     {navLinks.map((link) => (
                         <Link
                             key={link.name}
                             href={link.href}
-                            className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors"
+                            className="text-base font-bold text-foreground border-[3px] border-transparent hover:border-border hover:bg-tertiary px-4 py-2 transition-all brutal-hover rounded-xl"
                         >
                             {link.name}
                         </Link>
                     ))}
+                    <ThemeToggle />
                 </div>
 
-                {/* Mobile Toggle */}
-                <button
-                    className="md:hidden text-foreground"
-                    onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                >
-                    {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
-                </button>
+                {/* Mobile Toggle & Theme Toggle */}
+                <div className="md:hidden flex items-center gap-4">
+                    <ThemeToggle />
+                    <button
+                        className="text-card-foreground p-2 border-[3px] border-border bg-card brutal-shadow-sm brutal-active rounded-xl"
+                        onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                    >
+                        {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+                    </button>
+                </div>
             </div>
 
             {/* Mobile Menu */}
@@ -72,14 +77,14 @@ export function Navbar() {
                         initial={{ opacity: 0, height: 0 }}
                         animate={{ opacity: 1, height: 'auto' }}
                         exit={{ opacity: 0, height: 0 }}
-                        className="md:hidden bg-background border-b border-border overflow-hidden"
+                        className="md:hidden bg-background border-b-[3px] border-border overflow-hidden"
                     >
                         <div className="flex flex-col p-6 gap-4">
                             {navLinks.map((link) => (
                                 <Link
                                     key={link.name}
                                     href={link.href}
-                                    className="text-lg font-medium text-foreground hover:text-primary transition-colors py-2 px-4 rounded-lg hover:bg-muted"
+                                    className="text-xl font-bold text-card-foreground brutal-border bg-card hover:bg-tertiary transition-colors py-3 px-4 brutal-shadow-sm brutal-active"
                                     onClick={() => setMobileMenuOpen(false)}
                                 >
                                     {link.name}

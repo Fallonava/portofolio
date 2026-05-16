@@ -2,14 +2,15 @@
 
 import { useRef, useState } from 'react';
 import { motion } from 'framer-motion';
+import { cn } from '@/lib/utils';
 
 interface SpotlightCardProps {
     children: React.ReactNode;
     className?: string;
-    spotlightColor?: string;
+    hoverColor?: string;
 }
 
-export function SpotlightCard({ children, className = "", spotlightColor = "rgba(255, 255, 255, 0.25)" }: SpotlightCardProps) {
+export function SpotlightCard({ children, className = "", hoverColor = "bg-accent" }: SpotlightCardProps) {
     const divRef = useRef<HTMLDivElement>(null);
     const [isFocused, setIsFocused] = useState(false);
     const [position, setPosition] = useState({ x: 0, y: 0 });
@@ -50,15 +51,12 @@ export function SpotlightCard({ children, className = "", spotlightColor = "rgba
             onBlur={handleBlur}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
-            className={`relative overflow-hidden rounded-xl border border-border bg-gradient-to-br from-neutral-900 to-neutral-950 px-8 py-16 shadow-2xl ${className}`}
+            className={cn(
+                "relative overflow-hidden brutal-border brutal-shadow brutal-hover bg-white",
+                isFocused || opacity > 0 ? hoverColor : '',
+                className
+            )}
         >
-            <div
-                className="pointer-events-none absolute -inset-px opacity-0 transition duration-300"
-                style={{
-                    opacity,
-                    background: `radial-gradient(600px circle at ${position.x}px ${position.y}px, ${spotlightColor}, transparent 40%)`,
-                }}
-            />
             <div className="relative z-10">{children}</div>
         </div>
     );

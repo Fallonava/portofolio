@@ -4,14 +4,15 @@ import { motion } from 'framer-motion';
 import { Mail, MessageSquare, Send, Github, Linkedin, Twitter } from 'lucide-react';
 import { useState } from 'react';
 import { cn } from '@/lib/utils';
+import { toast } from 'sonner';
 
 export function Contact() {
     const [focused, setFocused] = useState<string | null>(null);
 
     return (
-        <section id="contact" className="py-24 bg-background relative overflow-hidden">
+        <section id="contact" className="py-32 bg-background relative overflow-hidden border-b-[3px] border-border">
             {/* Background Elements */}
-            <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-3xl translate-y-1/2 translate-x-1/2" />
+            <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'repeating-linear-gradient(45deg, var(--color-border) 0, var(--color-border) 2px, transparent 0, transparent 50%)', backgroundSize: '20px 20px' }} />
 
             <div className="container mx-auto px-6 relative z-10">
                 <motion.div
@@ -21,10 +22,10 @@ export function Contact() {
                     transition={{ duration: 0.6 }}
                     className="text-center mb-16"
                 >
-                    <h2 className="text-4xl md:text-5xl font-heading font-bold mb-4 tracking-tight">
-                        Let's <span className="text-primary">Connect</span>
+                    <h2 className="text-5xl md:text-7xl font-heading font-black mb-6 tracking-tighter uppercase text-foreground" style={{ textShadow: '4px 4px 0px var(--color-primary)' }}>
+                        Let's <span className="bg-white text-foreground px-4 brutal-border inline-block brutal-shadow-sm rotate-2">Connect</span>
                     </h2>
-                    <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
+                    <p className="text-foreground font-bold max-w-2xl mx-auto text-xl uppercase bg-white brutal-border p-4 brutal-shadow">
                         Ready to start your next project? I'm open to new opportunities and collaborations.
                     </p>
                 </motion.div>
@@ -38,26 +39,34 @@ export function Contact() {
                         transition={{ duration: 0.6, delay: 0.2 }}
                         className="flex flex-col gap-8"
                     >
-                        <div className="p-8 rounded-3xl bg-card/50 backdrop-blur-sm border border-border/50 shadow-lg relative overflow-hidden group">
-                            <div className="absolute inset-0 bg-gradient-to-br from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                            <h3 className="text-2xl font-bold mb-6 flex items-center gap-3">
-                                <span className="p-3 rounded-xl bg-primary/10 text-primary">
-                                    <MessageSquare size={24} />
+                        <div className="p-10 bg-card brutal-border brutal-shadow relative overflow-hidden group">
+                            <h3 className="text-4xl font-black mb-6 flex items-center gap-3 text-card-foreground uppercase">
+                                <span className="p-3 bg-accent border-[3px] border-border brutal-shadow-sm text-foreground rounded-xl">
+                                    <MessageSquare size={32} strokeWidth={3} />
                                 </span>
                                 Get in touch
                             </h3>
-                            <p className="text-muted-foreground leading-relaxed mb-8">
+                            <p className="text-card-foreground font-bold leading-relaxed mb-8 border-l-[3px] border-border pl-4">
                                 Whether you have a question, a project idea, or just want to say hi, I'll try my best to get back to you!
                             </p>
 
                             <div className="flex flex-col gap-6">
-                                <a href="mailto:hello@fallonava.com" className="flex items-center gap-4 p-4 rounded-xl bg-background/50 border border-border/50 hover:border-primary/50 transition-colors group/link cursor-pointer">
-                                    <Mail className="text-primary group-hover/link:scale-110 transition-transform" />
+                                <button 
+                                    onClick={(e) => {
+                                        e.preventDefault();
+                                        navigator.clipboard.writeText("hello@fallonava.com");
+                                        toast.success("Email copied to clipboard!", { 
+                                            icon: "📋",
+                                        });
+                                    }}
+                                    className="flex items-center gap-4 p-4 bg-tertiary brutal-border group/link cursor-pointer brutal-shadow-sm brutal-hover text-left w-full"
+                                >
+                                    <Mail className="text-foreground group-hover/link:scale-110 transition-transform" size={32} strokeWidth={3} />
                                     <div>
-                                        <div className="text-xs text-muted-foreground">Email</div>
-                                        <div className="font-medium text-foreground">hello@fallonava.com</div>
+                                        <div className="text-sm font-black text-foreground uppercase">Email</div>
+                                        <div className="font-bold text-foreground text-xl">hello@fallonava.com</div>
                                     </div>
-                                </a>
+                                </button>
                             </div>
                         </div>
 
@@ -73,10 +82,10 @@ export function Contact() {
                                         key={idx}
                                         href={social.link}
                                         target="_blank"
-                                        className="p-4 rounded-xl bg-card border border-border/50 hover:border-primary/50 hover:bg-primary/5 text-muted-foreground hover:text-primary transition-all duration-300 transform hover:-translate-y-1"
+                                        className="p-4 bg-card brutal-border text-card-foreground brutal-shadow-sm brutal-hover"
                                         aria-label={social.label}
                                     >
-                                        <social.icon size={24} />
+                                        <social.icon size={32} strokeWidth={3} />
                                     </a>
                                 ))}
                             </div>
@@ -91,18 +100,15 @@ export function Contact() {
                         transition={{ duration: 0.6, delay: 0.4 }}
                         className="relative"
                     >
-                        {/* Holographic Border Effect */}
-                        <div className="absolute -inset-0.5 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 rounded-3xl opacity-20 blur-xl animate-pulse" />
-
-                        <form className="relative p-8 md:p-10 rounded-3xl bg-background/80 backdrop-blur-xl border border-white/10 shadow-2xl flex flex-col gap-6">
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <form className="relative p-10 bg-card brutal-border brutal-shadow flex flex-col gap-8">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                                 <div className="flex flex-col gap-2">
-                                    <label htmlFor="name" className="text-sm font-medium text-muted-foreground ml-1">Name</label>
-                                    <div className={`relative rounded-xl overflow-hidden transition-all duration-300 ring-1 ring-border/50 ${focused === 'name' ? 'ring-primary shadow-[0_0_20px_rgba(37,99,235,0.15)]' : 'bg-secondary/20'}`}>
+                                    <label htmlFor="name" className="text-lg font-black text-card-foreground uppercase">Name</label>
+                                    <div className={`relative transition-all duration-300 bg-background`}>
                                         <input
                                             type="text"
                                             id="name"
-                                            className="w-full px-5 py-4 bg-transparent outline-none text-foreground placeholder-muted-foreground/50"
+                                            className="w-full px-5 py-4 bg-background border-[3px] border-border rounded-xl outline-none text-foreground font-bold placeholder-foreground/50 focus:bg-primary transition-colors focus:shadow-[4px_4px_0px_0px_var(--color-border)]"
                                             placeholder="John Doe"
                                             onFocus={() => setFocused('name')}
                                             onBlur={() => setFocused(null)}
@@ -110,12 +116,12 @@ export function Contact() {
                                     </div>
                                 </div>
                                 <div className="flex flex-col gap-2">
-                                    <label htmlFor="email" className="text-sm font-medium text-muted-foreground ml-1">Email</label>
-                                    <div className={`relative rounded-xl overflow-hidden transition-all duration-300 ring-1 ring-border/50 ${focused === 'email' ? 'ring-primary shadow-[0_0_20px_rgba(37,99,235,0.15)]' : 'bg-secondary/20'}`}>
+                                    <label htmlFor="email" className="text-lg font-black text-card-foreground uppercase">Email</label>
+                                    <div className={`relative transition-all duration-300 bg-background`}>
                                         <input
                                             type="email"
                                             id="email"
-                                            className="w-full px-5 py-4 bg-transparent outline-none text-foreground placeholder-muted-foreground/50"
+                                            className="w-full px-5 py-4 bg-background border-[3px] border-border rounded-xl outline-none text-foreground font-bold placeholder-foreground/50 focus:bg-primary transition-colors focus:shadow-[4px_4px_0px_0px_var(--color-border)]"
                                             placeholder="john@example.com"
                                             onFocus={() => setFocused('email')}
                                             onBlur={() => setFocused(null)}
@@ -125,12 +131,12 @@ export function Contact() {
                             </div>
 
                             <div className="flex flex-col gap-2">
-                                <label htmlFor="message" className="text-sm font-medium text-muted-foreground ml-1">Message</label>
-                                <div className={`relative rounded-xl overflow-hidden transition-all duration-300 ring-1 ring-border/50 ${focused === 'message' ? 'ring-primary shadow-[0_0_20px_rgba(37,99,235,0.15)]' : 'bg-secondary/20'}`}>
+                                <label htmlFor="message" className="text-lg font-black text-card-foreground uppercase">Message</label>
+                                <div className={`relative transition-all duration-300 bg-background`}>
                                     <textarea
                                         id="message"
                                         rows={4}
-                                        className="w-full px-5 py-4 bg-transparent outline-none text-foreground placeholder-muted-foreground/50 resize-none"
+                                        className="w-full px-5 py-4 bg-background border-[3px] border-border rounded-xl outline-none text-foreground font-bold placeholder-foreground/50 resize-none focus:bg-primary transition-colors focus:shadow-[4px_4px_0px_0px_var(--color-border)]"
                                         placeholder="How can I help you?"
                                         onFocus={() => setFocused('message')}
                                         onBlur={() => setFocused(null)}
@@ -138,9 +144,9 @@ export function Contact() {
                                 </div>
                             </div>
 
-                            <button className="mt-2 w-full py-4 rounded-xl bg-gradient-to-r from-primary to-blue-600 text-white font-bold tracking-wide shadow-lg hover:shadow-primary/25 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 flex items-center justify-center gap-2">
+                            <button className="mt-4 w-full py-5 bg-secondary text-foreground font-black uppercase text-xl brutal-border brutal-shadow-sm brutal-hover flex items-center justify-center gap-3">
                                 Send Message
-                                <Send size={18} />
+                                <Send size={24} strokeWidth={3} />
                             </button>
                         </form>
                     </motion.div>

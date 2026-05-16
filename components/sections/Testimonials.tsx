@@ -4,10 +4,11 @@ import CardSwap, { Card } from "@/components/ui/CardSwap";
 import DecryptedText from "@/components/ui/DecryptedText";
 import { cn } from "@/lib/utils";
 import { motion } from "framer-motion";
+import { testimonials as CARDS } from "@/lib/data";
 
 export function Testimonials() {
     return (
-        <section className="py-24 bg-background overflow-hidden relative min-h-[800px] flex items-center justify-center">
+        <section className="py-32 bg-secondary border-b-[3px] border-border overflow-hidden relative min-h-[800px] flex items-center justify-center">
             <div className="container mx-auto px-6">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
 
@@ -20,35 +21,34 @@ export function Testimonials() {
                             transition={{ duration: 0.6 }}
                             className="space-y-4"
                         >
-                            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4">
-                                <span className="relative flex h-2 w-2">
-                                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-                                    <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
-                                </span>
+                            <div className="inline-flex items-center gap-3 px-4 py-2 bg-primary brutal-border text-foreground text-sm font-black uppercase mb-4 brutal-shadow-sm transform -rotate-1">
                                 Client Stories
                             </div>
 
-                            <h2 className="text-4xl md:text-6xl font-heading font-bold tracking-tight mb-4 text-foreground">
-                                Trusted by <br />
-                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-blue-600">
+                            <h2 className="text-[clamp(2.5rem,6vw,5rem)] font-black uppercase tracking-tighter mb-6">
+                                <span className="block text-outline bg-card text-card-foreground brutal-border brutal-shadow inline-block px-4 sm:px-6 py-2 -rotate-2">
+                                    Trusted By
+                                </span>
+                                <br />
+                                <span className="block mt-4 text-foreground drop-shadow-[4px_4px_0_rgba(0,0,0,1)] dark:drop-shadow-[4px_4px_0_rgba(255,255,255,1)]">
                                     Industry Leaders
                                 </span>
                             </h2>
 
-                            <p className="text-muted-foreground text-lg max-w-xl">
+                            <p className="text-card-foreground font-bold text-xl max-w-xl bg-card brutal-border p-4 brutal-shadow">
                                 Discover how I help companies transform their digital presence with
-                                high-performance applications and stunning designs.
+                                raw power and uncompromising designs.
                             </p>
                         </motion.div>
 
                         <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
-                            <div className="flex flex-col items-center lg:items-start p-4 rounded-2xl bg-secondary/30 backdrop-blur-sm border border-border/50">
-                                <h3 className="text-3xl font-bold text-primary">100%</h3>
-                                <p className="text-sm text-muted-foreground">Client Satisfaction</p>
+                            <div className="flex flex-col items-center lg:items-start p-6 bg-accent brutal-border brutal-shadow-sm transform rotate-1">
+                                <h3 className="text-5xl font-black text-foreground mb-2">100%</h3>
+                                <p className="text-sm font-bold text-foreground uppercase">Client Satisfaction</p>
                             </div>
-                            <div className="flex flex-col items-center lg:items-start p-4 rounded-2xl bg-secondary/30 backdrop-blur-sm border border-border/50">
-                                <h3 className="text-3xl font-bold text-primary">24/7</h3>
-                                <p className="text-sm text-muted-foreground">Support & Maintenance</p>
+                            <div className="flex flex-col items-center lg:items-start p-6 bg-tertiary brutal-border brutal-shadow-sm transform -rotate-1">
+                                <h3 className="text-5xl font-black text-foreground mb-2">24/7</h3>
+                                <p className="text-sm font-bold text-foreground uppercase">Support & Maint.</p>
                             </div>
                         </div>
 
@@ -64,7 +64,7 @@ export function Testimonials() {
                                 revealDirection="center"
                                 speed={100}
                                 maxIterations={20}
-                                className="font-mono text-sm text-primary/70 tracking-widest"
+                                className="font-mono text-xl font-black text-card-foreground tracking-widest bg-card border-[3px] border-border px-2 py-1 rounded-xl"
                             />
                         </motion.div>
                     </div>
@@ -81,15 +81,15 @@ export function Testimonials() {
                             skewAmount={4}
                         >
                             {CARDS.map((card) => (
-                                <Card key={card.id} className="p-8 flex flex-col justify-between shadow-2xl dark:bg-neutral-900 bg-white dark:border-white/10 border-neutral-200">
-                                    <div>
+                                <Card key={card.id} className="p-8 flex flex-col justify-between bg-card brutal-border brutal-shadow transition-transform hover:-translate-y-2">
+                                    <div className="text-xl font-bold text-card-foreground border-l-[3px] border-border pl-4 mb-8">
                                         {card.content}
                                     </div>
-                                    <div>
-                                        <p className="text-neutral-900 font-bold dark:text-white text-lg">
+                                    <div className="bg-primary p-4 brutal-border mt-auto">
+                                        <p className="text-foreground font-black text-xl uppercase tracking-wider">
                                             {card.name}
                                         </p>
-                                        <p className="text-neutral-500 font-medium dark:text-neutral-400">
+                                        <p className="text-foreground font-bold uppercase text-sm mt-1">
                                             {card.designation}
                                         </p>
                                     </div>
@@ -103,64 +103,3 @@ export function Testimonials() {
     );
 }
 
-// Small utility to highlight the content of specific section of a testimonial content
-export const Highlight = ({
-    children,
-    className,
-}: {
-    children: React.ReactNode;
-    className?: string;
-}) => {
-    return (
-        <span
-            className={cn(
-                "font-bold bg-emerald-100 text-emerald-700 dark:bg-emerald-700/[0.2] dark:text-emerald-500 px-1 py-0.5",
-                className
-            )}
-        >
-            {children}
-        </span>
-    );
-};
-
-const CARDS = [
-    {
-        id: 0,
-        name: "Sarah Chen",
-        designation: "Product Manager @ TechFlow",
-        content: (
-            <>
-                <p className="mb-4 text-neutral-700 dark:text-neutral-200">
-                    The dashboard Fallonava built for us <Highlight>transformed our workflow</Highlight>.
-                    The attention to detail and performance optimization is simply outstanding.
-                </p>
-            </>
-        ),
-    },
-    {
-        id: 1,
-        name: "Michael Ross",
-        designation: "Director @ HealthPlus",
-        content: (
-            <>
-                <p className="mb-4 text-neutral-700 dark:text-neutral-200">
-                    I was impressed by the <Highlight>modern aesthetic</Highlight> and intuitive UX.
-                    Highly recommended for anyone looking for premium web development.
-                </p>
-            </>
-        ),
-    },
-    {
-        id: 2,
-        name: "Elena Rodriguez",
-        designation: "Founder @ ArtDisplay",
-        content: (
-            <>
-                <p className="mb-4 text-neutral-700 dark:text-neutral-200">
-                    The digital display solution is <Highlight>beautiful and reliable</Highlight>.
-                    It runs 24/7 without a hitch and looks amazing on our 4K screens.
-                </p>
-            </>
-        ),
-    },
-];

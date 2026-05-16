@@ -1,12 +1,19 @@
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans, Inter } from "next/font/google";
+import { Space_Grotesk, Inter } from "next/font/google";
 import { SmoothScroll } from "@/components/providers/SmoothScroll";
+import { ThemeProvider } from "@/components/theme-provider";
+import { CustomCursor } from "@/components/custom-cursor";
+import { Noise } from "@/components/ui/Noise";
+import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
+import { ScrollProgress } from "@/components/ui/ScrollProgress";
+import { Toaster } from "sonner";
 import "./globals.css";
 
-const plusJakarta = Plus_Jakarta_Sans({
+const spaceGrotesk = Space_Grotesk({
   variable: "--font-heading",
   subsets: ["latin"],
   display: "swap",
+  weight: ["400", "500", "600", "700"],
 });
 
 const inter = Inter({
@@ -49,12 +56,28 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
-        className={`${plusJakarta.variable} ${inter.variable} font-sans antialiased`}
+        className={`${spaceGrotesk.variable} ${inter.variable} font-sans antialiased selection:bg-primary selection:text-white`}
       >
         <SmoothScroll>
-          {children}
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="dark"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <CustomCursor />
+            <Noise />
+            <ScrollProgress />
+            {children}
+            <WhatsAppButton />
+            <Toaster 
+              toastOptions={{
+                className: "bg-card text-card-foreground border-[3px] border-border brutal-shadow font-bold rounded-xl",
+              }}
+            />
+          </ThemeProvider>
         </SmoothScroll>
       </body>
     </html>

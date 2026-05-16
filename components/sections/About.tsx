@@ -1,31 +1,17 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { Code2 } from 'lucide-react';
 import { InfiniteScroll } from '@/components/ui/InfiniteScroll';
 import Image from 'next/image';
 
-const techStack = [
-    { name: "Next.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg" },
-    { name: "React", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
-    { name: "TypeScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" },
-    { name: "Tailwind", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg" },
-    { name: "Node.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" },
-    { name: "PostgreSQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" },
-    { name: "GraphQL", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/graphql/graphql-plain.svg" },
-    { name: "Prisma", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/prisma/prisma-original.svg" },
-    { name: "Docker", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" },
-    { name: "MongoDB", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" },
-    { name: "Redis", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg" },
-    { name: "Figma", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" },
-    { name: "Git", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" },
-    { name: "Vercel", icon: "https://assets.vercel.com/image/upload/v1588805858/repositories/vercel/logo.png" },
-];
+import { techStack } from '@/lib/data';
 
 export function About() {
     return (
-        <section id="about" className="py-24 bg-background relative overflow-hidden">
+        <section id="about" className="py-32 bg-secondary relative overflow-hidden border-b-[3px] border-border">
             <div className="container mx-auto px-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
 
                     {/* Text Content */}
                     <motion.div
@@ -34,29 +20,26 @@ export function About() {
                         viewport={{ once: true }}
                         transition={{ duration: 0.8 }}
                     >
-                        <h2 className="text-4xl md:text-5xl font-heading font-bold mb-6 tracking-tight">
-                            Beyond the <span className="text-primary">Pixel</span>
+                        <h2 className="text-[clamp(2.5rem,6vw,5rem)] font-black mb-8 tracking-tighter uppercase text-center bg-card text-card-foreground brutal-border brutal-shadow inline-block px-4 sm:px-8 py-4 -rotate-2 text-outline">
+                            ABOUT ME
                         </h2>
-                        <div className="space-y-4 text-lg text-muted-foreground leading-relaxed">
+                        <div className="text-foreground font-bold max-w-3xl mx-auto text-xl md:text-2xl uppercase border-[3px] border-border p-6 brutal-shadow bg-primary rounded-2xl space-y-4">
                             <p>
-                                I am a Full Stack Developer with a passion for building digital experiences that are not just functional, but emotional.
+                                I AM A FULL STACK DEVELOPER WITH A PASSION FOR BUILDING DIGITAL EXPERIENCES THAT ARE NOT JUST FUNCTIONAL, BUT RAW AND UNAPOLOGETIC.
                             </p>
                             <p>
-                                My philosophy is simple: <strong className="text-foreground">Technology should be indistinguishable from magic.</strong> I bridge the gap between engineering and aesthetics to create software that feels alive.
-                            </p>
-                            <p>
-                                Whether it's a complex dashboard or a stunning landing page, I bring a detail-oriented approach to every line of code.
+                                MY PHILOSOPHY IS SIMPLE: <strong className="text-primary-foreground uppercase">Code is power.</strong> I bridge the gap between engineering and brutalist aesthetics to create software that feels alive.
                             </p>
                         </div>
 
-                        <div className="mt-8 flex gap-8">
-                            <div>
-                                <span className="block text-3xl font-bold text-foreground">5+</span>
-                                <span className="text-sm text-muted-foreground">Years Experience</span>
+                        <div className="mt-12 flex gap-8">
+                            <div className="bg-secondary border-[3px] border-border p-4 text-center brutal-shadow-sm flex-1 rounded-2xl">
+                                <span className="block text-5xl font-black text-foreground">5+</span>
+                                <span className="text-lg font-bold text-foreground uppercase">Years Exp</span>
                             </div>
-                            <div>
-                                <span className="block text-3xl font-bold text-foreground">50+</span>
-                                <span className="text-sm text-muted-foreground">Projects Delivered</span>
+                            <div className="bg-accent border-[3px] border-border p-4 text-center brutal-shadow-sm flex-1 rounded-2xl">
+                                <span className="block text-5xl font-black text-foreground">50+</span>
+                                <span className="text-lg font-bold text-foreground uppercase">Projects</span>
                             </div>
                         </div>
                     </motion.div>
@@ -69,8 +52,13 @@ export function About() {
                         transition={{ duration: 0.8 }}
                         className="relative"
                     >
-                        <div className="bg-secondary/20 border border-border/50 rounded-3xl p-8 backdrop-blur-sm">
-                            <h3 className="text-xl font-bold mb-6 text-center">Powering My Workflow</h3>
+                        <div className="p-8 bg-card brutal-border brutal-shadow transform rotate-1 rounded-2xl">
+                            <h3 className="text-3xl font-black mb-6 flex items-center gap-3 text-card-foreground uppercase border-b-[3px] border-border pb-4">
+                                <span className="p-2 bg-tertiary border-[3px] border-border text-foreground">
+                                    <Code2 size={28} strokeWidth={3} />
+                                </span>
+                                Tech Stack
+                            </h3>
                             <InfiniteScroll
                                 items={techStack.map(tech => (
                                     <div key={tech.name} className="flex flex-col items-center justify-center gap-2">
@@ -83,7 +71,7 @@ export function About() {
                                                 sizes="(max-width: 768px) 48px, 64px"
                                             />
                                         </div>
-                                        <span className="text-sm font-medium text-muted-foreground">{tech.name}</span>
+                                        <span className="text-xs font-black text-foreground uppercase bg-accent border-[2px] border-border px-2 py-1 rounded-lg">{tech.name}</span>
                                     </div>
                                 ))}
                             />
