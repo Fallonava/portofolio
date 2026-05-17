@@ -10,14 +10,19 @@ const handler = NextAuth({
         password: { label: "Password", type: "password" }
       },
       async authorize(credentials) {
-        const adminUser = process.env.ADMIN_USERNAME || "admin";
-        const adminPass = process.env.ADMIN_PASSWORD || "password123";
+        const adminUser = process.env.ADMIN_USERNAME;
+        const adminPass = process.env.ADMIN_PASSWORD;
+
+        if (!adminUser || !adminPass) {
+          console.error('[NextAuth] ADMIN_USERNAME or ADMIN_PASSWORD env var is not set!');
+          return null;
+        }
 
         if (
           credentials?.username === adminUser &&
           credentials?.password === adminPass
         ) {
-          return { id: "1", name: "Admin", email: "admin@fallonava.com" };
+          return { id: '1', name: 'Admin', email: 'admin@fallonava.com' };
         }
         return null;
       }
@@ -30,8 +35,8 @@ const handler = NextAuth({
     strategy: "jwt",
     maxAge: 30 * 24 * 60 * 60, // 30 days
   },
-  secret: process.env.NEXTAUTH_SECRET || "fallonava-super-secret-key-2026",
-  debug: true,
+  secret: process.env.NEXTAUTH_SECRET,
+  debug: process.env.NODE_ENV === 'development',
 });
 
 export { handler as GET, handler as POST };
