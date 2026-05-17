@@ -3,7 +3,10 @@
 import React, { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 
+import { usePathname } from 'next/navigation'
+
 export function CustomCursor() {
+  const pathname = usePathname()
   const [mousePosition, setMousePosition] = useState({
     x: 0,
     y: 0
@@ -61,6 +64,10 @@ export function CustomCursor() {
       backgroundColor: "var(--color-secondary)",
       mixBlendMode: "difference" as any,
     }
+  }
+
+  if (pathname?.startsWith('/admin')) {
+    return null;
   }
 
   return (

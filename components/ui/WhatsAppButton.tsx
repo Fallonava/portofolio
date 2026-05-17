@@ -3,12 +3,17 @@
 import { motion } from 'framer-motion';
 import { MessageCircle } from 'lucide-react';
 import { useState } from 'react';
+import { usePathname } from 'next/navigation';
 
 export function WhatsAppButton() {
     const [isHovered, setIsHovered] = useState(false);
+    const pathname = usePathname();
     const phoneNumber = "6282136357362";
     const message = "Hello Fallonava! I would like to discuss a project.";
     const waLink = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+
+    // Hide on admin pages
+    if (pathname?.startsWith('/admin')) return null;
 
     return (
         <div className="fixed bottom-6 right-6 md:bottom-10 md:right-10 z-[100] flex items-center gap-4">

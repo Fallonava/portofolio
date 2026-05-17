@@ -116,6 +116,17 @@ body {
   font-family: var(--font-sans), sans-serif;
 }
 
+/* Lock scroll on admin pages — only the inner panel scrolls */
+html:has(.admin-layout) {
+  overflow: hidden;
+  height: 100%;
+}
+
+body:has(.admin-layout) {
+  overflow: hidden;
+  height: 100%;
+}
+
 h1,
 h2,
 h3,

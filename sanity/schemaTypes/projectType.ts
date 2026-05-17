@@ -1,9 +1,11 @@
 import { defineField, defineType } from 'sanity'
+import { FolderKanban } from 'lucide-react'
 
 export const projectType = defineType({
     name: 'project',
     title: 'Project',
     type: 'document',
+    icon: FolderKanban,
     fields: [
         defineField({
             name: 'title',
@@ -19,6 +21,53 @@ export const projectType = defineType({
                 source: 'title',
             },
             validation: (rule) => rule.required(),
+        }),
+        defineField({
+            name: 'isPublic',
+            title: 'Public Portfolio Project',
+            description: 'Turn on to show this project on your public website. Keep off for internal/private tracking.',
+            type: 'boolean',
+            initialValue: false,
+        }),
+        defineField({
+            name: 'clientName',
+            title: 'Client Name (Internal)',
+            type: 'string',
+        }),
+        defineField({
+            name: 'status',
+            title: 'Project Status',
+            type: 'string',
+            options: {
+                list: ['Planning', 'In Progress', 'In Review', 'Completed', 'Cancelled'],
+            },
+            initialValue: 'Planning',
+        }),
+        defineField({
+            name: 'progress',
+            title: 'Progress (%)',
+            type: 'number',
+            validation: (rule) => rule.min(0).max(100),
+            initialValue: 0,
+        }),
+        defineField({
+            name: 'paymentStatus',
+            title: 'Payment Status',
+            type: 'string',
+            options: {
+                list: ['Unpaid', 'Partial / DP', 'Paid'],
+            },
+            initialValue: 'Unpaid',
+        }),
+        defineField({
+            name: 'budget',
+            title: 'Project Budget / Value',
+            type: 'number',
+        }),
+        defineField({
+            name: 'deadline',
+            title: 'Deadline',
+            type: 'date',
         }),
         defineField({
             name: 'category',
@@ -78,4 +127,11 @@ export const projectType = defineType({
             description: 'Used to sort the projects. Lower numbers appear first.',
         }),
     ],
+    preview: {
+        select: {
+            title: 'title',
+            subtitle: 'category',
+            media: 'image',
+        },
+    },
 })

@@ -1,9 +1,11 @@
 import { defineField, defineType } from 'sanity'
+import { Briefcase } from 'lucide-react'
 
 export const experienceType = defineType({
     name: 'experience',
     title: 'Experience',
     type: 'document',
+    icon: Briefcase,
     fields: [
         defineField({
             name: 'year',
@@ -41,4 +43,10 @@ export const experienceType = defineType({
             type: 'number',
         }),
     ],
+    preview: {
+        select: {
+            title: 'title',
+            subtitle: 'company',
+        },
+    },
 })

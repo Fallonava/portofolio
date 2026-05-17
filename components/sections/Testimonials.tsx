@@ -85,10 +85,12 @@ export function Testimonials({ data }: { data: any[] }) {
                             {CARDS.map((card, idx) => (
                                 <Card key={card.id ?? idx} className="p-8 flex flex-col justify-between bg-card brutal-border brutal-shadow transition-transform hover:-translate-y-2">
                                     <div className="text-xl font-bold text-card-foreground border-l-[3px] border-border pl-4 mb-8">
-                                        {/* Support both Sanity (block content) and static (ReactNode) */}
-                                        {Array.isArray(card.content)
-                                            ? <PortableText value={card.content} />
-                                            : card.content
+                                        {/* Support Sanity (text/string), Sanity (block), and static (ReactNode) */}
+                                        {typeof card.content === 'string' 
+                                            ? <p className="mb-4 text-black">{card.content}</p>
+                                            : Array.isArray(card.content)
+                                                ? <PortableText value={card.content} />
+                                                : card.content
                                         }
                                     </div>
                                     <div className="bg-primary p-4 brutal-border mt-auto">

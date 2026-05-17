@@ -1,9 +1,11 @@
 import { defineField, defineType } from 'sanity'
+import { MessageSquareQuote } from 'lucide-react'
 
 export const testimonialType = defineType({
     name: 'testimonial',
     title: 'Testimonial',
     type: 'document',
+    icon: MessageSquareQuote,
     fields: [
         defineField({
             name: 'name',
@@ -20,8 +22,7 @@ export const testimonialType = defineType({
         defineField({
             name: 'content',
             title: 'Content',
-            type: 'array',
-            of: [{ type: 'block' }],
+            type: 'text',
             validation: (rule) => rule.required(),
         }),
         defineField({
@@ -30,4 +31,10 @@ export const testimonialType = defineType({
             type: 'number',
         }),
     ],
+    preview: {
+        select: {
+            title: 'name',
+            subtitle: 'designation',
+        },
+    },
 })
