@@ -145,3 +145,183 @@ h6 {
 .animate-scroll {
   animation: scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite;
 }
+
+/* ================================================
+   ADMIN DARK MODE — Apple 2026 / visionOS Glass
+
+   Philosophy: Ultra-dark canvas (#050508) + vivid 
+   ambient glow gradients + rgba glass surfaces with 
+   backdrop-blur. NOT solid fills — real Apple glass.
+
+   Depth layers (transparent over dark canvas):
+   Sidebar   → rgba(0,0,0,0.82)    + blur(60px)
+   Cards     → rgba(255,255,255,0.07) + blur(40px)
+   Inset     → rgba(255,255,255,0.05)
+   Elevated  → rgba(255,255,255,0.09)
+   ================================================ */
+
+/* ── Page canvas — near black, slight blue tint ── */
+.admin-layout[data-dark="true"] {
+  background: #050508 !important;
+  color: #EBEBF5 !important;
+}
+
+/* ── Ambient glows: MORE vivid in dark (not less!) ── */
+.admin-layout[data-dark="true"] .bg-gradient-to-tr {
+  opacity: 0.60 !important;
+  filter: saturate(2) brightness(0.85) !important;
+}
+.admin-layout[data-dark="true"] .bg-gradient-to-bl {
+  opacity: 0.50 !important;
+  filter: saturate(1.8) brightness(0.8) !important;
+}
+
+/* ── Primary glass surfaces — frosted card ── */
+.admin-layout[data-dark="true"] .bg-white\/80,
+.admin-layout[data-dark="true"] .bg-white\/70,
+.admin-layout[data-dark="true"] .bg-white\/60,
+.admin-layout[data-dark="true"] .bg-white\/95,
+.admin-layout[data-dark="true"] .bg-white\/90,
+.admin-layout[data-dark="true"] .bg-white\/40,
+.admin-layout[data-dark="true"] .bg-white {
+  background: rgba(255, 255, 255, 0.08) !important;
+  backdrop-filter: blur(40px) saturate(130%) !important;
+  -webkit-backdrop-filter: blur(40px) saturate(130%) !important;
+}
+
+/* ── Secondary / inset glass ── */
+.admin-layout[data-dark="true"] .bg-gray-50,
+.admin-layout[data-dark="true"] .bg-gray-50\/80,
+.admin-layout[data-dark="true"] .bg-gray-50\/60,
+.admin-layout[data-dark="true"] .bg-gray-50\/50 {
+  background: rgba(255, 255, 255, 0.05) !important;
+  backdrop-filter: none !important;
+}
+
+.admin-layout[data-dark="true"] .bg-gray-100,
+.admin-layout[data-dark="true"] .bg-gray-100\/80 {
+  background: rgba(255, 255, 255, 0.10) !important;
+}
+
+/* ── Accent buttons → crisp white pill ── */
+.admin-layout[data-dark="true"] .bg-gray-900 {
+  background: rgba(255, 255, 255, 0.92) !important;
+  color: #050508 !important;
+  backdrop-filter: none !important;
+}
+.admin-layout[data-dark="true"] .hover\:bg-black:hover,
+.admin-layout[data-dark="true"] .hover\:bg-gray-900:hover {
+  background: rgba(255, 255, 255, 1) !important;
+}
+
+/* ── Button text: stay dark on white buttons ── */
+.admin-layout[data-dark="true"] .bg-gray-900 .text-white,
+.admin-layout[data-dark="true"] .bg-gray-900 span,
+.admin-layout[data-dark="true"] .bg-gray-900 svg {
+  color: #050508 !important;
+  stroke: #050508 !important;
+}
+
+/* ── Borders — thin luminous rings ── */
+.admin-layout[data-dark="true"] .border-white,
+.admin-layout[data-dark="true"] .border-white\/60,
+.admin-layout[data-dark="true"] .border-white\/80 {
+  border-color: rgba(255, 255, 255, 0.14) !important;
+}
+.admin-layout[data-dark="true"] .border-gray-100,
+.admin-layout[data-dark="true"] .border-gray-100\/50,
+.admin-layout[data-dark="true"] .border-gray-200,
+.admin-layout[data-dark="true"] .border-gray-200\/60 {
+  border-color: rgba(255, 255, 255, 0.09) !important;
+}
+
+/* ── Dividers ── */
+.admin-layout[data-dark="true"] .divide-gray-100\/60 > * + *,
+.admin-layout[data-dark="true"] .divide-y > * + * {
+  border-color: rgba(255, 255, 255, 0.07) !important;
+}
+
+/* ── Text hierarchy — Apple system labels ── */
+.admin-layout[data-dark="true"] .text-gray-900 { color: #FFFFFF !important; }
+.admin-layout[data-dark="true"] .text-gray-800 { color: #EBEBF5 !important; }
+.admin-layout[data-dark="true"] .text-gray-700 { color: #D1D1D6 !important; }
+.admin-layout[data-dark="true"] .text-gray-600 { color: #AEAEB2 !important; }
+.admin-layout[data-dark="true"] .text-gray-500 { color: #8E8E93 !important; }
+.admin-layout[data-dark="true"] .text-gray-400 { color: #545458 !important; }
+
+/* ── Inputs — dark glass fields ── */
+.admin-layout[data-dark="true"] input:not([type="range"]):not([type="checkbox"]):not([type="file"]):not([type="color"]),
+.admin-layout[data-dark="true"] textarea,
+.admin-layout[data-dark="true"] select {
+  background: rgba(255, 255, 255, 0.06) !important;
+  border-color: rgba(255, 255, 255, 0.11) !important;
+  color: #EBEBF5 !important;
+}
+.admin-layout[data-dark="true"] input::placeholder,
+.admin-layout[data-dark="true"] textarea::placeholder {
+  color: rgba(235, 235, 245, 0.3) !important;
+}
+.admin-layout[data-dark="true"] input:focus,
+.admin-layout[data-dark="true"] textarea:focus,
+.admin-layout[data-dark="true"] select:focus {
+  background: rgba(255, 255, 255, 0.10) !important;
+  border-color: rgba(0, 122, 255, 0.9) !important;
+  box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.2) !important;
+  outline: none !important;
+}
+
+/* ── Table ── */
+.admin-layout[data-dark="true"] tr:hover td {
+  background: rgba(255, 255, 255, 0.04) !important;
+}
+.admin-layout[data-dark="true"] thead th {
+  background: rgba(255, 255, 255, 0.05) !important;
+  color: #8E8E93 !important;
+}
+
+/* ── Sticky header ── */
+.admin-layout[data-dark="true"] .sticky {
+  background: rgba(5, 5, 8, 0.80) !important;
+  backdrop-filter: blur(28px) saturate(150%) !important;
+  -webkit-backdrop-filter: blur(28px) saturate(150%) !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* ── Hover surfaces ── */
+.admin-layout[data-dark="true"] .hover\:bg-gray-50:hover,
+.admin-layout[data-dark="true"] .hover\:bg-gray-100:hover {
+  background: rgba(255, 255, 255, 0.07) !important;
+}
+
+/* ── Multi-layer elevation shadows ── */
+.admin-layout[data-dark="true"] [class*="shadow-"] {
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.09),
+    0 4px 24px rgba(0, 0, 0, 0.55),
+    0 1px 3px rgba(0, 0, 0, 0.4) !important;
+}
+
+/* ── Sidebar — pure black glass ── */
+.admin-layout[data-dark="true"] .admin-sidebar {
+  background: rgba(0, 0, 0, 0.78) !important;
+  backdrop-filter: blur(60px) saturate(200%) !important;
+  -webkit-backdrop-filter: blur(60px) saturate(200%) !important;
+  border-color: rgba(255, 255, 255, 0.09) !important;
+  box-shadow:
+    inset -1px 0 0 rgba(255,255,255,0.06),
+    8px 0 32px rgba(0, 0, 0, 0.4) !important;
+}
+
+/* ── Badge/pill backgrounds ── */
+.admin-layout[data-dark="true"] .bg-blue-50  { background: rgba(0, 122, 255, 0.15) !important; }
+.admin-layout[data-dark="true"] .bg-green-50 { background: rgba(52, 199, 89, 0.15) !important; }
+.admin-layout[data-dark="true"] .bg-orange-50 { background: rgba(255, 149, 0, 0.15) !important; }
+.admin-layout[data-dark="true"] .bg-purple-50 { background: rgba(175, 82, 222, 0.15) !important; }
+.admin-layout[data-dark="true"] .bg-red-50   { background: rgba(255, 59, 48, 0.12) !important; }
+.admin-layout[data-dark="true"] .bg-red-50\/50 { background: rgba(255, 59, 48, 0.08) !important; }
+
+/* ── Selection ── */
+.admin-layout[data-dark="true"] ::selection {
+  background: rgba(0, 122, 255, 0.35);
+  color: #FFFFFF;
+}

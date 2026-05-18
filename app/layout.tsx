@@ -7,6 +7,7 @@ import { Noise } from "@/components/ui/Noise";
 import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
 import { ScrollProgress } from "@/components/ui/ScrollProgress";
 import { Toaster } from "sonner";
+import { getSiteSettings } from "@/sanity/lib/siteSettings";
 import "./globals.css";
 
 const spaceGrotesk = Space_Grotesk({
@@ -50,13 +51,18 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const settings = await getSiteSettings();
+  const accent   = settings.accentColor ?? '#007AFF';
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <style>{`:root { --accent: ${accent}; --primary: ${accent}; }`}</style>
+      </head>
       <body
         className={`${spaceGrotesk.variable} ${inter.variable} font-sans antialiased selection:bg-primary selection:text-white`}
       >

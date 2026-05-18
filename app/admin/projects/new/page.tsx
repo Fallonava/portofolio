@@ -2,7 +2,7 @@
 
 import { useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
-import { ArrowLeft, Upload, Loader2, Save, Info, AlignLeft, BarChart2, ChevronRight } from 'lucide-react';
+import { ArrowLeft, Upload, Loader2, Save, Info, AlignLeft, BarChart2, ChevronRight, Sparkles } from 'lucide-react';
 import Link from 'next/link';
 import { createProject } from '../actions';
 import { MotionDiv } from '@/components/ui/motion';
@@ -24,7 +24,37 @@ export default function NewProjectPage() {
   const [error, setError] = useState('');
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [progress, setProgress] = useState(0);
+  const [aiLoading, setAiLoading] = useState(false);
+  const [aiError, setAiError] = useState('');
+  const [generatedDesc, setGeneratedDesc] = useState('');
   const formRef = useRef<HTMLFormElement>(null);
+
+  const generateDescription = async () => {
+    const form = formRef.current;
+    if (!form) return;
+    const title = (form.querySelector('[name="title"]') as HTMLInputElement)?.value;
+    const tech = (form.querySelector('[name="tech"]') as HTMLInputElement)?.value;
+    const category = (form.querySelector('[name="category"]') as HTMLSelectElement)?.value;
+    if (!title) { setAiError('Fill in the Project Title first (Tab 1).'); return; }
+    setAiLoading(true); setAiError('');
+    try {
+      const res = await fetch('/api/ai/generate', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ title, tech, category }),
+      });
+      const data = await res.json();
+      if (data.error) throw new Error(data.error);
+      setGeneratedDesc(data.description);
+      // Auto-fill the textarea
+      const textarea = form.querySelector('[name="description"]') as HTMLTextAreaElement;
+      if (textarea) { textarea.value = data.description; textarea.dispatchEvent(new Event('input', { bubbles: true })); }
+    } catch (err: any) {
+      setAiError(err.message);
+    } finally {
+      setAiLoading(false);
+    }
+  };
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -191,7 +221,19 @@ export default function NewProjectPage() {
               >
                 {/* Short Description */}
                 <div className="space-y-1.5 md:col-span-3">
-                  <label className={labelCls}>Short Description *</label>
+                  <div className="flex items-center justify-between">
+                    <label className={labelCls}>Short Description *</label>
+                    <button
+                      type="button"
+                      onClick={generateDescription}
+                      disabled={aiLoading}
+                      className="flex items-center gap-1.5 px-3 py-1.5 bg-gradient-to-r from-[#007AFF] to-[#AF52DE] text-white text-[11px] font-bold rounded-xl hover:opacity-90 transition-all disabled:opacity-60 shadow-[0_2px_8px_rgba(0,122,255,0.3)]"
+                    >
+                      {aiLoading ? <Loader2 size={11} className="animate-spin" /> : <Sparkles size={11} />}
+                      {aiLoading ? 'Generating...' : 'AI Generate'}
+                    </button>
+                  </div>
+                  {aiError && <p className="text-[11px] text-[#FF3B30] font-semibold">{aiError}</p>}
                   <textarea name="description" required rows={3}
                     className={`${inputCls} resize-none`} placeholder="Brief summary of the project..." />
                 </div>
