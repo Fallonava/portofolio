@@ -9,11 +9,11 @@ import { ThemeToggle } from '@/components/theme-toggle';
 import type { SiteSettings } from '@/sanity/lib/siteSettings';
 
 const defaultNavLinks = [
-    { name: 'About',        href: '#about' },
-    { name: 'Experience',   href: '#experience' },
-    { name: 'Projects',     href: '#projects' },
-    { name: 'Testimonials', href: '#testimonials' },
-    { name: 'Contact',      href: '#contact' },
+    { name: 'About',        href: '/#about' },
+    { name: 'Experience',   href: '/#experience' },
+    { name: 'Projects',     href: '/#projects' },
+    { name: 'Testimonials', href: '/#testimonials' },
+    { name: 'Contact',      href: '/#contact' },
 ];
 
 interface NavbarProps { settings?: SiteSettings }
@@ -29,6 +29,11 @@ export function Navbar({ settings }: NavbarProps) {
     }, []);
 
     const name = settings?.heroName || 'Fallonava';
+
+    const navLinks = [...defaultNavLinks];
+    if (settings?.showBlog) {
+        navLinks.push({ name: 'Blog', href: '/blog' });
+    }
 
     return (
         <nav className={cn('fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b-[3px] border-transparent',
@@ -46,7 +51,7 @@ export function Navbar({ settings }: NavbarProps) {
 
                 {/* Desktop Links */}
                 <div className="hidden md:flex items-center gap-6">
-                    {defaultNavLinks.map((link) => (
+                    {navLinks.map((link) => (
                         <Link key={link.name} href={link.href}
                             className="text-base font-bold text-foreground border-[3px] border-transparent hover:border-border hover:bg-tertiary px-4 py-2 transition-all brutal-hover rounded-xl">
                             {link.name}
@@ -71,7 +76,7 @@ export function Navbar({ settings }: NavbarProps) {
                     <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} exit={{ opacity: 0, height: 0 }}
                         className="md:hidden bg-background border-b-[3px] border-border overflow-hidden">
                         <div className="flex flex-col p-6 gap-4">
-                            {defaultNavLinks.map((link) => (
+                            {navLinks.map((link) => (
                                 <Link key={link.name} href={link.href}
                                     className="text-xl font-bold text-card-foreground brutal-border bg-card hover:bg-tertiary transition-colors py-3 px-4 brutal-shadow-sm brutal-active"
                                     onClick={() => setMobileMenuOpen(false)}>

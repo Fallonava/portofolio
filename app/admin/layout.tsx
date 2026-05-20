@@ -3,7 +3,7 @@
 import { ReactNode, useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { LayoutDashboard, FolderKanban, Briefcase, MessageSquareQuote, LogOut, BarChart2, Moon, Sun, Settings } from 'lucide-react';
+import { LayoutDashboard, FolderKanban, Briefcase, MessageSquareQuote, LogOut, BarChart2, Moon, Sun, Settings, FileText } from 'lucide-react';
 import { signOut } from 'next-auth/react';
 import { motion } from 'framer-motion';
 
@@ -25,6 +25,7 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
   const navItems = [
     { name: 'Overview',     mobileName: 'Home',     href: '/admin',               icon: LayoutDashboard },
     { name: 'Projects',     mobileName: 'Projects', href: '/admin/projects',       icon: FolderKanban },
+    { name: 'Blog',         mobileName: 'Blog',     href: '/admin/blog',           icon: FileText },
     { name: 'Experience',   mobileName: 'Career',   href: '/admin/experience',     icon: Briefcase },
     { name: 'Testimonials', mobileName: 'Reviews',  href: '/admin/testimonials',   icon: MessageSquareQuote },
     { name: 'Analytics',    mobileName: 'Stats',    href: '/admin/analytics',      icon: BarChart2 },

@@ -30,9 +30,26 @@ export interface ProjectDetail {
   deadline?: string;
   clientName?: string;
   link?: string;
+  demoVideoUrl?: string;
   isPublic?: boolean;
   tech?: string[];
   imageUrl?: string;
+}
+
+// Utility to match and get embed URLs for YouTube/Vimeo
+function getEmbedUrl(url: string | undefined): string | null {
+  if (!url) return null;
+  const ytRegex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/ ]{11})/;
+  const ytMatch = url.match(ytRegex);
+  if (ytMatch) {
+    return `https://www.youtube.com/embed/${ytMatch[1]}?autoplay=1&mute=1&loop=1&playlist=${ytMatch[1]}`;
+  }
+  const vimeoRegex = /vimeo\.com\/(?:channels\/(?:\w+\/)?|groups\/(?:[^\/]*)\/posts\/|album\/(?:\d+)\/video\/|video\/|)(\d+)(?:$|\/|\?)/;
+  const vimeoMatch = url.match(vimeoRegex);
+  if (vimeoMatch) {
+    return `https://player.vimeo.com/video/${vimeoMatch[1]}?autoplay=1&muted=1&loop=1`;
+  }
+  return null;
 }
 
 interface Props {
@@ -118,12 +135,42 @@ export function ProjectSlidePanel({ project, onClose }: Props) {
               {/* Scrollable Content */}
               <div className="flex-1 min-h-0 overflow-y-auto overscroll-contain">
 
-                {/* Image */}
-                {project.imageUrl && (
-                  <div className="w-full h-48 bg-gray-100 overflow-hidden">
-                    <img src={project.imageUrl} alt={project.title} className="w-full h-full object-cover" />
-                  </div>
-                )}
+                {/* Image or Video Showcase */}
+                {(() => {
+                  if (project.demoVideoUrl) {
+                    const embedUrl = getEmbedUrl(project.demoVideoUrl);
+                    return (
+                      <div className="w-full h-48 bg-black overflow-hidden relative border-b border-gray-150 shadow-[inset_0_4px_12px_rgba(0,0,0,0.3)]">
+                        {embedUrl ? (
+                          <iframe
+                            src={embedUrl}
+                            className="w-full h-full border-none"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowFullScreen
+                          />
+                        ) : (
+                          <video
+                            src={project.demoVideoUrl}
+                            autoPlay
+                            loop
+                            muted
+                            playsInline
+                            controls
+                            className="w-full h-full object-cover"
+                          />
+                        )}
+                      </div>
+                    );
+                  }
+                  if (project.imageUrl) {
+                    return (
+                      <div className="w-full h-48 bg-gray-100 overflow-hidden">
+                        <img src={project.imageUrl} alt={project.title} className="w-full h-full object-cover" />
+                      </div>
+                    );
+                  }
+                  return null;
+                })()}
 
                 <div className="p-6 space-y-6">
 

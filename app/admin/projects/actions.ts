@@ -26,6 +26,7 @@ export async function createProject(formData: FormData) {
     const description = formData.get('description') as string;
     const longDescription = formData.get('longDescription') as string;
     const link = formData.get('link') as string;
+    const demoVideoUrl = formData.get('demoVideoUrl') as string;
     const techInput = formData.get('tech') as string;
     const color = formData.get('color') as string;
     const orderInput = formData.get('order') as string;
@@ -70,6 +71,7 @@ export async function createProject(formData: FormData) {
       description,
       longDescription,
       link,
+      demoVideoUrl: demoVideoUrl || undefined,
       tech: techArray,
       color,
       order: orderInput ? parseInt(orderInput, 10) : 0,
@@ -112,6 +114,7 @@ export async function updateProject(id: string, formData: FormData) {
     const description = formData.get('description') as string;
     const longDescription = formData.get('longDescription') as string;
     const link = formData.get('link') as string;
+    const demoVideoUrl = formData.get('demoVideoUrl') as string;
     const techInput = formData.get('tech') as string;
     const color = formData.get('color') as string;
     const orderInput = formData.get('order') as string;
@@ -135,6 +138,7 @@ export async function updateProject(id: string, formData: FormData) {
       description,
       longDescription: longDescription || undefined,
       link: link || undefined,
+      demoVideoUrl: demoVideoUrl || undefined,
       tech: techArray,
       color: color || undefined,
       order: orderInput ? parseInt(orderInput, 10) : 0,

@@ -79,9 +79,39 @@ function HeroTab({ s }: { s: SiteSettings }) {
           <label className={labelCls}>CTA Button URL</label>
           <input name="heroCtaUrl" type="url" defaultValue={s.heroCtaUrl} className={inputCls} placeholder="https://wa.me/..." />
         </div>
+        
+        <div className="space-y-1.5 md:col-span-2">
+          <label className={labelCls}>Hero Background Video URL</label>
+          <input name="heroBackgroundVideo" type="url" defaultValue={s.heroBackgroundVideo} className={inputCls} placeholder="E.g. https://www.youtube.com/watch?v=... or direct MP4 link" />
+        </div>
+
+        {/* About & Marquee Sync */}
+        <div className="md:col-span-2 border-t border-gray-150 pt-4 space-y-4">
+          <h3 className="text-xs font-bold text-gray-500 uppercase tracking-wider">About & Marquee Customization</h3>
+          
+          <div className="space-y-1.5">
+            <label className={labelCls}>About Section Heading</label>
+            <input name="aboutHeading" defaultValue={s.aboutHeading} className={inputCls} placeholder="ABOUT ME" />
+          </div>
+          
+          <div className="space-y-1.5">
+            <label className={labelCls}>About Section Text</label>
+            <textarea name="aboutText" rows={3} defaultValue={s.aboutText} className={`${inputCls} resize-none`} placeholder="Describe yourself in detail..." />
+          </div>
+
+          <div className="space-y-1.5">
+            <label className={labelCls}>About Skills Tags (Comma separated)</label>
+            <input name="aboutSkills" defaultValue={s.aboutSkills?.join(', ')} className={inputCls} placeholder="Next.js, TypeScript, React, UI/UX" />
+          </div>
+
+          <div className="space-y-1.5">
+            <label className={labelCls}>Scrolling Marquee Text</label>
+            <input name="marqueeText" defaultValue={s.marqueeText} className={inputCls} placeholder="CREATIVE DEVELOPER • NEOBRUTALISM • DYNAMIC UI" />
+          </div>
+        </div>
 
         {/* Profile Image */}
-        <div className="space-y-1.5 md:col-span-2">
+        <div className="space-y-1.5 md:col-span-2 border-t border-gray-150 pt-4">
           <label className={labelCls}>Profile / Avatar Image</label>
           <div className="flex items-center gap-4">
             {preview && <img src={preview} alt="Profile" className="w-16 h-16 rounded-2xl object-cover border border-gray-100" />}
@@ -157,6 +187,7 @@ function SectionsTab({ s }: { s: SiteSettings }) {
     { name: 'showProjects',     label: 'Projects Section',     default: s.showProjects ?? true },
     { name: 'showTestimonials', label: 'Testimonials Section', default: s.showTestimonials ?? true },
     { name: 'showFeatures',     label: 'Features Section',     default: s.showFeatures ?? true },
+    { name: 'showBlog',         label: 'Blog / Writeups Section', default: s.showBlog ?? false },
   ]
 
   return (

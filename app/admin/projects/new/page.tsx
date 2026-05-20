@@ -245,6 +245,12 @@ export default function NewProjectPage() {
                     className={`${inputCls} resize-none`} placeholder="Detailed explanation..." />
                 </div>
 
+                {/* Demo Video URL */}
+                <div className="space-y-1.5 md:col-span-3">
+                  <label className={labelCls}>Demo Video URL (Direct MP4, YouTube, or Vimeo)</label>
+                  <input name="demoVideoUrl" type="url" className={inputCls} placeholder="e.g. https://assets.mixkit.co/videos/preview/...mp4" />
+                </div>
+
                 {/* Link */}
                 <div className="space-y-1.5 md:col-span-2">
                   <label className={labelCls}>Project Link (URL)</label>

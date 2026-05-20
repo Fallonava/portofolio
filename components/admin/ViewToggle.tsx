@@ -6,6 +6,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { KanbanBoard } from '@/components/admin/KanbanBoard';
 import { QuickStatusEdit } from '@/components/admin/QuickStatusEdit';
 import { ProjectSlidePanel, type ProjectDetail } from '@/components/admin/ProjectSlidePanel';
+import Link from 'next/link';
+import { DeleteButton } from '@/components/admin/DeleteButton';
+import { deleteProject } from '@/app/admin/projects/actions';
 
 const PAYMENT_STYLE: Record<string, string> = {
   'Paid':         'bg-[#34C759]/15 text-[#34C759] border-[#34C759]/20',
@@ -113,12 +116,20 @@ export function ProjectsView({ projects }: { projects: ProjectDetail[] }) {
                           </td>
                           <td className="px-6 py-4 text-right" onClick={(e) => e.stopPropagation()}>
                             <div className="flex items-center justify-end gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                              <button className="p-2 bg-white rounded-xl text-gray-400 hover:text-[#007AFF] hover:shadow-md border border-gray-100 transition-all">
+                              <Link
+                                href={`/admin/projects/${project._id}/edit`}
+                                className="p-2 bg-white rounded-xl text-gray-400 hover:text-[#007AFF] hover:shadow-md border border-gray-100 transition-all block"
+                                onClick={(e) => e.stopPropagation()}
+                              >
                                 <Edit2 size={14} />
-                              </button>
-                              <button className="p-2 bg-white rounded-xl text-gray-400 hover:text-[#FF3B30] hover:shadow-md border border-gray-100 transition-all">
-                                <Trash2 size={14} />
-                              </button>
+                              </Link>
+                              <div onClick={(e) => e.stopPropagation()}>
+                                <DeleteButton 
+                                  id={project._id}
+                                  label={project.title}
+                                  onDelete={deleteProject}
+                                />
+                              </div>
                             </div>
                           </td>
                         </motion.tr>

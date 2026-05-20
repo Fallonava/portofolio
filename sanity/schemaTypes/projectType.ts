@@ -104,6 +104,12 @@ export const projectType = defineType({
             type: 'url',
         }),
         defineField({
+            name: 'demoVideoUrl',
+            title: 'Demo Video URL',
+            description: 'Optional: Direct link to a hosted MP4 video or YouTube/Vimeo link to demonstrate the project.',
+            type: 'url',
+        }),
+        defineField({
             name: 'tech',
             title: 'Tech Stack',
             type: 'array',

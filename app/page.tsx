@@ -47,8 +47,8 @@ export default async function Home() {
     <main className="flex min-h-screen flex-col bg-background">
       <Navbar settings={settings} />
       <Hero settings={settings} />
-      <Marquee />
-      <About />
+      <Marquee settings={settings} />
+      <About settings={settings} />
 
       {settings.showExperience !== false && experiences?.length > 0 && <Experience data={experiences} />}
       {settings.showProjects   !== false && projects?.length > 0     && <Projects data={projects} />}

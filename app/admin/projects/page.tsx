@@ -16,6 +16,7 @@ export default async function ProjectsAdminPage() {
     description,
     longDescription,
     link,
+    demoVideoUrl,
     isPublic,
     status,
     progress,

@@ -22,7 +22,7 @@ interface Project {
   color?: string; order?: number; isPublic?: boolean;
   clientName?: string; status?: string; progress?: number;
   paymentStatus?: string; budget?: number; deadline?: string;
-  slug?: string; imageUrl?: string;
+  slug?: string; imageUrl?: string; demoVideoUrl?: string;
 }
 
 export function EditProjectForm({ project }: { project: Project }) {
@@ -158,6 +158,10 @@ export function EditProjectForm({ project }: { project: Project }) {
                 <div className="space-y-1.5">
                   <label className={labelCls}>Project Link (URL)</label>
                   <input name="link" type="url" defaultValue={project.link} className={inputCls} placeholder="https://" />
+                </div>
+                <div className="space-y-1.5">
+                  <label className={labelCls}>Demo Video URL</label>
+                  <input name="demoVideoUrl" type="url" defaultValue={project.demoVideoUrl} className={inputCls} placeholder="https://" />
                 </div>
               </motion.div>
             )}

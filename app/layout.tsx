@@ -8,6 +8,8 @@ import { WhatsAppButton } from "@/components/ui/WhatsAppButton";
 import { ScrollProgress } from "@/components/ui/ScrollProgress";
 import { Toaster } from "sonner";
 import { getSiteSettings } from "@/sanity/lib/siteSettings";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import "./globals.css";
 
 const spaceGrotesk = Space_Grotesk({
@@ -83,6 +85,8 @@ export default async function RootLayout({
                 className: "bg-card text-card-foreground border-[3px] border-border brutal-shadow font-bold rounded-xl",
               }}
             />
+            <Analytics />
+            <SpeedInsights />
           </ThemeProvider>
         </SmoothScroll>
       </body>

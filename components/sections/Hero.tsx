@@ -19,11 +19,26 @@ export function Hero({ settings }: HeroProps) {
     const ctaLabel  = settings?.heroCtaLabel || "Let's Talk";
     const ctaUrl    = settings?.heroCtaUrl   || '#contact';
     const resumeUrl = settings?.resumeUrl    || '/resume.pdf';
+    const videoUrl  = settings?.heroBackgroundVideo;
 
     return (
         <section id="hero" className="relative w-full h-screen flex items-center justify-center overflow-hidden bg-background border-b-4 border-border">
-            <div className="absolute inset-0 bg-grid opacity-10 pointer-events-none"></div>
-            <div className="absolute inset-0 z-0 opacity-20" style={{ backgroundImage: 'radial-gradient(var(--color-border) 1px, transparent 1px)', backgroundSize: '20px 20px' }}></div>
+            {/* Ambient Background Grid */}
+            <div className="absolute inset-0 bg-grid opacity-10 pointer-events-none z-1"></div>
+            <div className="absolute inset-0 z-1 opacity-20" style={{ backgroundImage: 'radial-gradient(var(--color-border) 1px, transparent 1px)', backgroundSize: '20px 20px' }}></div>
+
+            {/* Premium Apple Ambient Video Background */}
+            {videoUrl && (
+                <video
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="absolute inset-0 w-full h-full object-cover z-0 opacity-25 pointer-events-none mix-blend-luminosity"
+                >
+                    <source src={videoUrl} type="video/mp4" />
+                </video>
+            )}
 
             <div className="relative z-10 container mx-auto px-6 text-center flex flex-col items-center">
 

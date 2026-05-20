@@ -5,17 +5,35 @@ import { X, ExternalLink, Github } from 'lucide-react';
 import Image from 'next/image';
 import { useEffect } from 'react';
 import { cn } from '@/lib/utils';
+import { urlForImage } from "@/sanity/lib/image";
 
 interface Project {
     id: string;
     title: string;
     description: string;
     longDescription: string;
-    image: string;
+    image: any;
     tech: string[];
     link: string;
+    demoVideoUrl?: string;
     github?: string;
     color: string;
+}
+
+// Utility to match and get embed URLs for YouTube/Vimeo
+function getEmbedUrl(url: string | undefined): string | null {
+  if (!url) return null;
+  const ytRegex = /(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/ ]{11})/;
+  const ytMatch = url.match(ytRegex);
+  if (ytMatch) {
+    return `https://www.youtube.com/embed/${ytMatch[1]}?autoplay=1&mute=1&loop=1&playlist=${ytMatch[1]}`;
+  }
+  const vimeoRegex = /vimeo\.com\/(?:channels\/(?:\w+\/)?|groups\/(?:[^\/]*)\/posts\/|album\/(?:\d+)\/video\/|video\/|)(\d+)(?:$|\/|\?)/;
+  const vimeoMatch = url.match(vimeoRegex);
+  if (vimeoMatch) {
+    return `https://player.vimeo.com/video/${vimeoMatch[1]}?autoplay=1&muted=1&loop=1`;
+  }
+  return null;
 }
 
 interface ProjectModalProps {
@@ -72,16 +90,44 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
 
                             {/* Content Section */}
                             <div className="p-6 md:p-8 flex flex-col md:flex-row gap-8">
-                                {/* Image Section */}
+                                {/* Image/Video Section */}
                                 <div className="w-full md:w-1/2">
-                                    <div className="relative w-full aspect-video border-[4px] border-border rounded-2xl overflow-hidden bg-black">
-                                        <Image
-                                            src={project.image}
-                                            alt={project.title}
-                                            fill
-                                            sizes="(max-width: 768px) 100vw, 50vw"
-                                            className="object-cover"
-                                        />
+                                    <div className="relative w-full aspect-video border-[4px] border-border rounded-2xl overflow-hidden bg-black shadow-[inset_0_4px_12px_rgba(0,0,0,0.5)]">
+                                        {(() => {
+                                            if (project.demoVideoUrl) {
+                                                const embedUrl = getEmbedUrl(project.demoVideoUrl);
+                                                if (embedUrl) {
+                                                    return (
+                                                        <iframe
+                                                            src={embedUrl}
+                                                            className="w-full h-full border-none"
+                                                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                                            allowFullScreen
+                                                        />
+                                                    );
+                                                }
+                                                return (
+                                                    <video
+                                                        src={project.demoVideoUrl}
+                                                        autoPlay
+                                                        loop
+                                                        muted
+                                                        playsInline
+                                                        controls
+                                                        className="w-full h-full object-cover"
+                                                    />
+                                                );
+                                            }
+                                            return (
+                                                <Image
+                                                    src={typeof project.image === 'string' ? project.image : urlForImage(project.image).url()}
+                                                    alt={project.title}
+                                                    fill
+                                                    sizes="(max-width: 768px) 100vw, 50vw"
+                                                    className="object-cover"
+                                                />
+                                            );
+                                        })()}
                                     </div>
                                 </div>
 
